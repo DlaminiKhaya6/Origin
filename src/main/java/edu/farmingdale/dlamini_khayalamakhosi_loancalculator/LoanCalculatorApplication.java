@@ -22,7 +22,7 @@ public class LoanCalculatorApplication extends Application {
         stage.setScene(scene);
         stage.show();*/
 
-        Scene scene = new Scene(new LoanCalculatorPane(), 300, 300);
+        Scene scene = new Scene(new LoanCalculatorPane(), 400, 400);
         stage.setTitle("Loan Calculator");
         stage.setScene(scene);
         stage.show();

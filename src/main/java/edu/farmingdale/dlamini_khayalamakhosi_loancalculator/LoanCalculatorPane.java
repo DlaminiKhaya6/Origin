@@ -10,55 +10,59 @@ import javafx.scene.text.Font;
 
 public class LoanCalculatorPane extends GridPane
 {
-    private Label result;
-    private TextField input;
+    private Label annualLabel, yearsLabel, amountLabel, monthlyAmtLbl, totalAmtLbl, monthlyAmtResultLbl, totalAmtResultLbl;
+    private Button calculateButton;
+    private TextField annual, years, amount;
 
     public LoanCalculatorPane()
     {
         Font font = new Font(20);
 
-        Label annualLabel = new Label("Annual Interest Rate:");
+        annualLabel = new Label("Annual Interest Rate:");
         annualLabel.setFont(font);
         GridPane.setHalignment(annualLabel, HPos.RIGHT);
 
-        Label yearsLabel = new Label("Number of Years:");
+        yearsLabel = new Label("Number of Years:");
         yearsLabel.setFont(font);
         GridPane.setHalignment(yearsLabel, HPos.RIGHT);
 
-        Label amountLabel = new Label("Loan Amount:");
+        amountLabel = new Label("Loan Amount:");
         amountLabel.setFont(font);
         GridPane.setHalignment(amountLabel, HPos.RIGHT);
 
-        Label monthlyAmtLbl = new Label("Monthly Payment:");
+        monthlyAmtLbl = new Label("Monthly Payment:");
         monthlyAmtLbl.setFont(font);
         GridPane.setHalignment(monthlyAmtLbl, HPos.RIGHT);
 
-        Label totalAmtLbl = new Label("Total Payment:");
+        totalAmtLbl = new Label("Total Payment:");
         totalAmtLbl.setFont(font);
         GridPane.setHalignment(totalAmtLbl, HPos.RIGHT);
 
-        Label monthlyAmtResultLbl = new Label("---");
+        monthlyAmtResultLbl = new Label("---");
         monthlyAmtResultLbl.setFont(font);
         GridPane.setHalignment(monthlyAmtResultLbl, HPos.CENTER);
 
-        Label totalAmtResultLbl = new Label("---");
+        totalAmtResultLbl = new Label("---");
         totalAmtResultLbl.setFont(font);
         GridPane.setHalignment(totalAmtResultLbl, HPos.CENTER);
 
-        TextField annual = new TextField();
+        annual = new TextField();
         annual.setFont(font);
-        annual.setPrefWidth(50);
+        annual.setPrefWidth(150);
         annual.setAlignment(Pos.CENTER);
 
-        TextField years = new TextField();
+        years = new TextField();
         years.setFont(font);
-        years.setPrefWidth(50);
+        years.setPrefWidth(150);
         years.setAlignment(Pos.CENTER);
 
-        TextField amount = new TextField();
+        amount = new TextField();
         amount.setFont(font);
-        amount.setPrefWidth(50);
+        amount.setPrefWidth(150);
         amount.setAlignment(Pos.CENTER);
+
+        calculateButton = new Button("Calculate");
+        calculateButton.setOnAction(this::processCalcButton);
 
         setAlignment(Pos.CENTER);
         setHgap(20);
@@ -75,10 +79,21 @@ public class LoanCalculatorPane extends GridPane
         add(monthlyAmtResultLbl, 1, 3);
         add(totalAmtLbl, 0, 4);
         add(totalAmtResultLbl, 1, 4);
+        add(calculateButton, 1, 5);
+
     }
 
-    public void processReturn(ActionEvent event)
+    public void processCalcButton(ActionEvent event)
     {
-
+        if(event.getSource() == calculateButton)
+        {
+            double annualInt = Double.parseDouble(annual.getText());
+            int yearsInt = Integer.parseInt(years.getText());
+            double amountInt = Double.parseDouble(amount.getText());
+            double totalAmt = amountInt * (1 + (annualInt/100)*yearsInt);
+            double monthlyAmt = totalAmt / (yearsInt * 12);
+            monthlyAmtResultLbl.setText("Monthly Amount: " + monthlyAmt);
+            totalAmtResultLbl.setText("Total Amount: " + totalAmt);
+        }
     }
 }

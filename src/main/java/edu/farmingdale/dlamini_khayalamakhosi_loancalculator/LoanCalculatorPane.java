@@ -10,14 +10,18 @@ import javafx.scene.text.Font;
 
 public class LoanCalculatorPane extends GridPane
 {
+    //Establishing all components in the field
     private Label annualLabel, yearsLabel, amountLabel, monthlyAmtLbl, totalAmtLbl, monthlyAmtResultLbl, totalAmtResultLbl;
     private Button calculateButton;
     private TextField annual, years, amount;
 
+    //method where all loans are calculated
     public LoanCalculatorPane()
     {
+        //creating fonts
         Font font = new Font(20);
 
+        //creation of labels
         annualLabel = new Label("Annual Interest Rate:");
         annualLabel.setFont(font);
         GridPane.setHalignment(annualLabel, HPos.RIGHT);
@@ -46,6 +50,7 @@ public class LoanCalculatorPane extends GridPane
         totalAmtResultLbl.setFont(font);
         GridPane.setHalignment(totalAmtResultLbl, HPos.CENTER);
 
+        //creation of textfields
         annual = new TextField();
         annual.setFont(font);
         annual.setPrefWidth(150);
@@ -61,14 +66,17 @@ public class LoanCalculatorPane extends GridPane
         amount.setPrefWidth(150);
         amount.setAlignment(Pos.CENTER);
 
+        //creation of buttons
         calculateButton = new Button("Calculate");
         calculateButton.setOnAction(this::processCalcButton);
 
+        //setting all spaces between/alignments of program
         setAlignment(Pos.CENTER);
         setHgap(20);
         setVgap(10);
         setStyle("-fx-background-color: #f0f0f0");
 
+        //adding components to program
         add(annualLabel, 0, 0);
         add(annual, 1, 0);
         add(yearsLabel, 0, 1);
@@ -83,6 +91,7 @@ public class LoanCalculatorPane extends GridPane
 
     }
 
+    //method that calculates the interest
     public void processCalcButton(ActionEvent event)
     {
         if(event.getSource() == calculateButton)

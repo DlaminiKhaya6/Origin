@@ -22,13 +22,15 @@ public class LoanCalculatorApplication extends Application {
         stage.setScene(scene);
         stage.show();*/
 
-        Scene scene = new Scene(new LoanCalculatorPane(), 400, 400);
+        //creation of scene
+        Scene scene = new Scene(new LoanCalculatorPane(), 400, 300);
         stage.setTitle("Loan Calculator");
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch();
     }
 }
